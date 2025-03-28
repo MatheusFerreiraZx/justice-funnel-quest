@@ -19,7 +19,7 @@ const ProblemCard = ({ icon, title, type }: ProblemCardProps) => {
 
   return (
     <button 
-      className="w-full bg-white rounded-lg overflow-hidden border border-gray-200 shadow-md transition-all duration-300"
+      className="w-full bg-white rounded-lg overflow-hidden border border-gray-200 shadow-md"
       onClick={handleClick}
     >
       <div className="p-6 flex flex-col items-center">

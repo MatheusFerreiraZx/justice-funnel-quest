@@ -11,7 +11,7 @@ export const generateWhatsAppMessage = (
   timeframe: string,
   name: string
 ): string => {
-  let baseMessage = `Olá Dr. Geraldo, me chamo ${name}. `;
+  let baseMessage = `Olá Dr. Richard, me chamo ${name}. `;
   
   switch (problemType) {
     case "discrimination":

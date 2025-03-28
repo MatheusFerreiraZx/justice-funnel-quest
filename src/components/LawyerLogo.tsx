@@ -11,7 +11,7 @@ const LawyerLogo = () => {
         <div className="w-32 h-1 bg-lawyer-DEFAULT absolute -bottom-3 left-1/2 -translate-x-1/2" />
       </div>
       <div className="text-center mt-6">
-        <h1 className="text-2xl font-bold text-lawyer-dark uppercase tracking-wider">Dr. Geraldo</h1>
+        <h1 className="text-2xl font-bold text-lawyer-dark uppercase tracking-wider">Dr. Richard</h1>
         <p className="text-sm text-gray-500 uppercase tracking-widest">Advogado Trabalhista</p>
       </div>
     </div>

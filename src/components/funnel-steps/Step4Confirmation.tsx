@@ -92,7 +92,7 @@ const Step4Confirmation = () => {
         </Button>
         
         <p className="mt-4 text-sm text-gray-500">
-          Você será direcionado para o WhatsApp do Dr. Geraldo com uma mensagem personalizada com base nas suas respostas.
+          Você será direcionado para o WhatsApp do Dr. Richard com uma mensagem personalizada com base nas suas respostas.
         </p>
       </div>
     </div>
