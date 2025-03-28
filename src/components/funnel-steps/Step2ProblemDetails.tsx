@@ -2,7 +2,14 @@
 import { useFunnel } from '@/context/FunnelContext';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, HelpCircle } from 'lucide-react';
+import { useState } from 'react';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 const problemTypeLabels = {
   discrimination: 'Discriminação no trabalho',
@@ -14,9 +21,20 @@ const problemTypeLabels = {
   other: 'Outro problema trabalhista'
 };
 
+const problemHints = {
+  discrimination: 'Exemplos: tratamento diferente devido a gênero, raça, idade, etc.',
+  harassment: 'Situações de humilhação, constrangimento, assédio sexual, etc.',
+  wages: 'Falta de pagamento, horas extras não pagas, valores incorretos, etc.',
+  termination: 'Demissão sem justa causa, sem aviso prévio, etc.',
+  retaliation: 'Punição por denunciar problemas ou exercer direitos trabalhistas.',
+  safety: 'Condições de trabalho perigosas, falta de equipamentos de segurança, etc.',
+  other: 'Descreva qualquer outro problema trabalhista que você esteja enfrentando.'
+};
+
 const Step2ProblemDetails = () => {
   const { funnelData, updateFunnelData, setCurrentStep } = useFunnel();
-
+  const [charCount, setCharCount] = useState(funnelData.description.length);
+  
   const handleBack = () => {
     setCurrentStep(1);
   };
@@ -25,6 +43,19 @@ const Step2ProblemDetails = () => {
     if (funnelData.description.trim().length > 0) {
       setCurrentStep(3);
     }
+  };
+
+  const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const value = e.target.value;
+    setCharCount(value.length);
+    updateFunnelData({ description: value });
+  };
+
+  const getProgressColor = () => {
+    if (charCount === 0) return 'bg-gray-300';
+    if (charCount < 20) return 'bg-red-400';
+    if (charCount < 50) return 'bg-yellow-400';
+    return 'bg-green-500';
   };
 
   return (
@@ -38,16 +69,41 @@ const Step2ProblemDetails = () => {
       </div>
       
       <div className="mb-6">
-        <label htmlFor="description" className="block text-gray-700 mb-2">
-          Conte-nos mais sobre seu problema trabalhista:
-        </label>
+        <div className="flex items-center justify-between mb-2">
+          <label htmlFor="description" className="block text-gray-700">
+            Conte-nos mais sobre seu problema trabalhista:
+          </label>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button type="button" className="text-gray-400 hover:text-lawyer-DEFAULT">
+                  <HelpCircle className="w-5 h-5" />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p className="max-w-xs">
+                  {funnelData.problemType ? problemHints[funnelData.problemType] : 'Descreva seu problema com detalhes para melhor avaliação.'}
+                </p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
         <Textarea
           id="description"
           placeholder="Descreva a situação que você enfrentou ou está enfrentando no seu local de trabalho..."
           className="min-h-32"
           value={funnelData.description}
-          onChange={(e) => updateFunnelData({ description: e.target.value })}
+          onChange={handleDescriptionChange}
         />
+        <div className="flex items-center justify-between mt-1 text-xs text-gray-500">
+          <span>Caracteres: {charCount}</span>
+          <div className="w-32 bg-gray-200 rounded-full h-1.5 overflow-hidden">
+            <div 
+              className={`h-full rounded-full transition-all ${getProgressColor()}`} 
+              style={{ width: `${Math.min(100, (charCount / 100) * 100)}%` }}
+            />
+          </div>
+        </div>
       </div>
       
       <div className="mb-6">
