@@ -1,4 +1,3 @@
-
 import { useFunnel } from '@/context/FunnelContext';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -57,8 +56,6 @@ const Step2ProblemDetails = () => {
     if (charCount < 50) return 'bg-yellow-400';
     return 'bg-green-500';
   };
-
-  const isFormValid = funnelData.description.trim().length > 0;
 
   return (
     <div className="animate-fade-in max-w-xl mx-auto">
@@ -132,12 +129,8 @@ const Step2ProblemDetails = () => {
         
         <Button 
           onClick={handleNext}
-          className={`flex items-center gap-2 transition-all ${
-            isFormValid 
-              ? "bg-lawyer-DEFAULT hover:bg-lawyer-accent text-white" 
-              : "bg-gray-700 text-white cursor-not-allowed"
-          }`}
-          disabled={!isFormValid}
+          className="bg-lawyer-DEFAULT hover:bg-lawyer-accent flex items-center gap-2 disabled:bg-gray-700 disabled:opacity-90 disabled:text-white disabled:cursor-not-allowed"
+          disabled={!funnelData.description.trim()}
         >
           Continuar
           <ArrowRight className="w-4 h-4" />
