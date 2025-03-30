@@ -20,7 +20,6 @@ const Step4Confirmation = () => {
   const { toast } = useToast();
 
   const handleSubmit = () => {
-    // Here you would typically send the data to your backend
     console.log('Submitting data:', funnelData);
     
     toast({
@@ -28,7 +27,6 @@ const Step4Confirmation = () => {
       description: "Redirecionando para WhatsApp...",
     });
     
-    // Open WhatsApp with custom message after a short delay
     setTimeout(() => {
       const whatsappUrl = getWhatsAppUrl(
         funnelData.problemType,
@@ -39,7 +37,6 @@ const Step4Confirmation = () => {
       
       window.open(whatsappUrl, '_blank');
       
-      // Reset the funnel after successful submission
       resetFunnel();
     }, 1500);
   };
