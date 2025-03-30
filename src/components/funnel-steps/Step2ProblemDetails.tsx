@@ -58,6 +58,8 @@ const Step2ProblemDetails = () => {
     return 'bg-green-500';
   };
 
+  const isFormValid = funnelData.description.trim().length > 0;
+
   return (
     <div className="animate-fade-in max-w-xl mx-auto">
       <h2 className="text-3xl font-bold mb-4 text-center">Descreva seu problema</h2>
@@ -130,8 +132,12 @@ const Step2ProblemDetails = () => {
         
         <Button 
           onClick={handleNext}
-          className="bg-lawyer-DEFAULT hover:bg-lawyer-accent flex items-center gap-2 disabled:bg-gray-700 disabled:opacity-100 disabled:text-white disabled:cursor-not-allowed"
-          disabled={!funnelData.description.trim()}
+          className={`flex items-center gap-2 transition-all ${
+            isFormValid 
+              ? "bg-lawyer-DEFAULT hover:bg-lawyer-accent text-white" 
+              : "bg-gray-700 text-white cursor-not-allowed"
+          }`}
+          disabled={!isFormValid}
         >
           Continuar
           <ArrowRight className="w-4 h-4" />
