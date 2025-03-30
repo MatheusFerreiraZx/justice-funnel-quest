@@ -1,3 +1,4 @@
+
 import { useFunnel } from '@/context/FunnelContext';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -129,7 +130,7 @@ const Step2ProblemDetails = () => {
         
         <Button 
           onClick={handleNext}
-          className="bg-lawyer-DEFAULT hover:bg-lawyer-accent flex items-center gap-2 disabled:bg-gray-700 disabled:opacity-90 disabled:text-white disabled:cursor-not-allowed"
+          className="bg-lawyer-DEFAULT hover:bg-lawyer-accent flex items-center gap-2 disabled:bg-gray-700 disabled:opacity-100 disabled:text-white disabled:cursor-not-allowed"
           disabled={!funnelData.description.trim()}
         >
           Continuar
