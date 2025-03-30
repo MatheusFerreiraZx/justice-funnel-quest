@@ -1,7 +1,6 @@
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-// Define the types for our funnel data
 export type ProblemType = 
   | 'discrimination' 
   | 'harassment' 
@@ -29,7 +28,6 @@ type FunnelContextType = {
   progressPercentage: number;
 };
 
-// Initial state for our funnel data
 const initialFunnelData: FunnelData = {
   problemType: null,
   description: '',
@@ -39,24 +37,19 @@ const initialFunnelData: FunnelData = {
   phone: '',
 };
 
-// Create the context
 const FunnelContext = createContext<FunnelContextType | undefined>(undefined);
 
-// Provider component
 export const FunnelProvider: React.FC<{children: ReactNode}> = ({ children }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [funnelData, setFunnelData] = useState<FunnelData>(initialFunnelData);
 
-  // Calculate progress percentage based on current step
-  const totalSteps = 4; // Update this if you add more steps
+  const totalSteps = 4;
   const progressPercentage = Math.floor((currentStep - 1) / totalSteps * 100);
 
-  // Function to update funnel data
   const updateFunnelData = (data: Partial<FunnelData>) => {
     setFunnelData(prev => ({ ...prev, ...data }));
   };
 
-  // Function to reset funnel
   const resetFunnel = () => {
     setCurrentStep(1);
     setFunnelData(initialFunnelData);
@@ -78,7 +71,6 @@ export const FunnelProvider: React.FC<{children: ReactNode}> = ({ children }) =>
   );
 };
 
-// Custom hook to use the funnel context
 export const useFunnel = () => {
   const context = useContext(FunnelContext);
   if (context === undefined) {

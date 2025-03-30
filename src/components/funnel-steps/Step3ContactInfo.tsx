@@ -10,11 +10,10 @@ const Step3ContactInfo = () => {
   const [validations, setValidations] = useState({
     name: false,
     email: false,
-    phone: true // Phone is optional, so default to true
+    phone: true
   });
 
   useEffect(() => {
-    // Validate fields whenever they change
     setValidations({
       name: funnelData.name.trim().length >= 3,
       email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(funnelData.email),
@@ -33,7 +32,6 @@ const Step3ContactInfo = () => {
   };
 
   const formatPhoneNumber = (value: string) => {
-    // Remove non-numeric characters
     const digits = value.replace(/\D/g, '');
     
     if (digits.length <= 2) {

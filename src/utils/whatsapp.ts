@@ -1,10 +1,8 @@
 
 import { ProblemType } from "@/context/FunnelContext";
 
-// Lawyer's phone number (replace with the actual number)
-const LAWYER_PHONE = "5511999999999"; // Format: country code + phone number without + or spaces
+const LAWYER_PHONE = "5511999999999";
 
-// Generate custom messages based on problem type and user data
 export const generateWhatsAppMessage = (
   problemType: ProblemType | null,
   description: string,
@@ -31,7 +29,6 @@ export const generateWhatsAppMessage = (
   }
 };
 
-// Generate WhatsApp URL with the message
 export const getWhatsAppUrl = (
   problemType: ProblemType | null,
   description: string,
